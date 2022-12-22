@@ -45,6 +45,7 @@ usbdeview & diskpart
    - check registry times on usbdeview and if you see somthing suspicios search it up on diskpart
 	ellenőrizze a regisztrációs időket az usbdeview-n, és ha valami gyanúsat lát, keressen rá a diskparton
 
-UI: Mivel geci szar az angolom csak ez tellik by: k1Nats_ HA VALAMI KI MARADT ITT MEG TALÁLOD: https://discord.gg/Ssx6AhYj2m
+-------------
+gigachadjezus
 
 
