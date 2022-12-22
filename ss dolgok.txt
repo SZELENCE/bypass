@@ -1,0 +1,50 @@
+regedit;
+usb storage: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\
+direct input: HKEY_CURRENT_USER\Software\Microsoft\DirectInput (most recent)
+              HKEY_USERS\S-1-5-21-2592817222-1857344355-971611281-1001\SOFTWARE\Microsoft\DirectInput\MostRecentApplication
+anti ss tool: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\explorer\DisallowRun
+mounted devices: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
+store: HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant\Store
+usersettings: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings
+task kill: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Command Processor
+recentdocs: HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+muicahe: HKEY_CLASSES_ROOT\Local Settings\Software\Microsoft\Windows\Shell\MuiCache
+opensavepidlmru: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU
+
+
+HKEY_CLASSES_ROOT\Local Settings\Software\Microsoft\Windows\Shell\MuiCache
+HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache : ebben a kettőben gyanús neveket lehet keresni
+
+cmd;
+fsutil:
+Törölt exék: fsutil usn readjournal c: csv | findstr /i /c:.exe | findstr /i /c:0x80000200 >> DeletedExes.txt && notepad DeletedExes.txt
+törölt  dll-ek: fsutil usn readjournal c: csv | findstr /i /c:.dll | findstr /i /c:0x80000200 >> DeletedDlls.txt && notepad DeletedDlls.txt
+törölt képek (png): fsutil usn readjournal c: csv | findstr /i /c:.png | findstr /i /c:0x80000200 >> DeletedPngs.txt && notepad DeletedPngs.txt
+Láthatatlan karakterek: fsutil usn readjournal c: csv | findstr /i /c:"?" >> InvisibleCh.txt && notepad InvisibleCh.txt
+fájlok futtatva wmic-el: fsutil usn readjournal c: csv | findstr /i /c:"0x00002020" >> WMIC.txt
+Átnevezett exék (régi): fsutil usn readjournal c: csv | findstr /i /c:.exe | findstr /i /c:0x00001000 >> OLDrenamed.txt && notepad OLDrenamed.txt
+Átnevezett exék (új): fsutil usn readjournal c: csv | findstr /i /c:.exe | findstr /i /c:0x00002000 >> NEWrenamed.txt && notepad NEWrenamed.txt
+cserélt (replaces): fsutil usn readjournal c: csv | findstr /i /c:.exe | findstr /i /c:0x00000006 >> Type.txt
+process restart: fsutil usn readjournal c: csv | findstr /i /C:".pf" | findstr /i /C:"%date%" | findstr /i /C:"net" /i /C:"net1" >> ProcessRestart.txt && notepad ProcessRestart.txt
+modified extensions: Select the path where you want to search for the specified file, then paste this in cmd: findstr /m /c:"!This program cannot be run in DOS mode." "*" 2>nul
+
+powershell;
+leállított szolgáltatások : get-service | where-object {$_.status -eq 'stopped'}.
+usb log: Get-WinEvent Microsoft-Windows-Kernel-PnP/Configuration | findstr 410 > usb.log
+powershell előzmény: C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine
+cserélt (replaces) / mappa mozgatása : Get-ChildItem -Path $shareName | Where-Object { $_.psIsContainer -eq 
+
+dlls with other extensions:
+fsutil usn readjournal c: csv | findstr /i /c:0x00080000 >> dll.txt
+search up OpenSavePIDlMRU or/and RecentDocs in regedit
+
+winprefetchview
+   - extremely useful for detecting cheats using cmd via conhost.exe (dream, glory clicker, pp clicker)
+
+usbdeview & diskpart
+   - check registry times on usbdeview and if you see somthing suspicios search it up on diskpart
+	ellenőrizze a regisztrációs időket az usbdeview-n, és ha valami gyanúsat lát, keressen rá a diskparton
+
+UI: Mivel geci szar az angolom csak ez tellik by: k1Nats_ HA VALAMI KI MARADT ITT MEG TALÁLOD: https://discord.gg/Ssx6AhYj2m
+
+
